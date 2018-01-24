@@ -1,0 +1,159 @@
+using Microsoft.Xna.Framework;
+using System;
+
+namespace Terraria
+{
+	public class CombatText
+	{
+		public Vector2 position;
+
+		public Vector2 velocity;
+
+		public float alpha;
+
+		public int alphaDir = 1;
+
+		public string text;
+
+		public float scale = 1f;
+
+		public float rotation;
+
+		public Color color;
+
+		public bool active;
+
+		public int lifeTime;
+
+		public bool crit;
+
+		public static void NewText(Rectangle location, Color color, string text, bool Crit = false)
+		{
+			if (Main.netMode != 2)
+			{
+				int i = 0;
+				while (i < 100)
+				{
+					if (!Main.combatText[i].active)
+					{
+						int num = 0;
+						if (Crit)
+						{
+							num = 1;
+						}
+						Vector2 vector = Main.fontCombatText[num].MeasureString(text);
+						Main.combatText[i].alpha = 1f;
+						Main.combatText[i].alphaDir = -1;
+						Main.combatText[i].active = true;
+						Main.combatText[i].scale = 0f;
+						Main.combatText[i].rotation = 0f;
+						Main.combatText[i].position.X = (float)location.X + (float)location.Width * 0.5f - vector.X * 0.5f;
+						Main.combatText[i].position.Y = (float)location.Y + (float)location.Height * 0.25f - vector.Y * 0.5f;
+						CombatText combatText = Main.combatText[i];
+						combatText.position.X = combatText.position.X + (float)Main.rand.Next(-(int)((double)location.Width * 0.5), (int)((double)location.Width * 0.5) + 1);
+						CombatText combatText2 = Main.combatText[i];
+						combatText2.position.Y = combatText2.position.Y + (float)Main.rand.Next(-(int)((double)location.Height * 0.5), (int)((double)location.Height * 0.5) + 1);
+						Main.combatText[i].color = color;
+						Main.combatText[i].text = text;
+						Main.combatText[i].velocity.Y = -7f;
+						Main.combatText[i].lifeTime = 60;
+						Main.combatText[i].crit = Crit;
+						if (!Crit)
+						{
+							break;
+						}
+						Main.combatText[i].text = text;
+						Main.combatText[i].color = new Color(255, 100, 30, 255);
+						Main.combatText[i].lifeTime *= 2;
+						CombatText combatText3 = Main.combatText[i];
+						combatText3.velocity.Y = combatText3.velocity.Y * 2f;
+						Main.combatText[i].velocity.X = (float)Main.rand.Next(-25, 26) * 0.05f;
+						Main.combatText[i].rotation = (float)(Main.combatText[i].lifeTime / 2) * 0.002f;
+						if (Main.combatText[i].velocity.X < 0f)
+						{
+							Main.combatText[i].rotation *= -1f;
+							break;
+						}
+						break;
+					}
+					else
+					{
+						i++;
+					}
+				}
+			}
+		}
+
+		public void Update()
+		{
+			if (this.active)
+			{
+				this.alpha += (float)this.alphaDir * 0.05f;
+				if ((double)this.alpha <= 0.6)
+				{
+					this.alphaDir = 1;
+				}
+				if (this.alpha >= 1f)
+				{
+					this.alpha = 1f;
+					this.alphaDir = -1;
+				}
+				this.velocity.Y = this.velocity.Y * 0.92f;
+				if (this.crit)
+				{
+					this.velocity.Y = this.velocity.Y * 0.92f;
+				}
+				this.velocity.X = this.velocity.X * 0.93f;
+				this.position += this.velocity;
+				this.lifeTime--;
+				if (this.lifeTime <= 0)
+				{
+					this.scale -= 0.1f;
+					if ((double)this.scale < 0.1)
+					{
+						this.active = false;
+					}
+					this.lifeTime = 0;
+					if (this.crit)
+					{
+						this.alphaDir = -1;
+						this.scale += 0.07f;
+					}
+				}
+				else
+				{
+					if (this.crit)
+					{
+						if (this.velocity.X < 0f)
+						{
+							this.rotation += 0.001f;
+						}
+						else
+						{
+							this.rotation -= 0.001f;
+						}
+					}
+					if (this.scale < 1f)
+					{
+						this.scale += 0.1f;
+					}
+					if (this.scale > 1f)
+					{
+						this.scale = 1f;
+					}
+				}
+			}
+		}
+
+		public static void UpdateCombatText()
+		{
+			for (int i = 0; i < 100; i++)
+			{
+				if (Main.combatText[i].active)
+				{
+					Main.combatText[i].Update();
+				}
+			}
+		}
+	}
+}

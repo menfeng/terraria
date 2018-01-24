@@ -1,0 +1,6 @@
+2018/1/24/周三 2:41:50
+System.DllNotFoundException: 无法加载 DLL“steam_api.dll”: 找不到指定的模块。 (异常来自 HRESULT:0x8007007E)。
+   在 Terraria.Steam.SteamAPI_Init()
+   在 Terraria.Steam.Init() 位置 G:\work\terraria\Terraria\Steam.cs:行号 20
+   在 Terraria.Program.Main(String[] args) 位置 G:\work\terraria\Terraria\Program.cs:行号 101
+

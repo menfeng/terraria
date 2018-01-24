@@ -1,0 +1,16 @@
+E:\work\terraria5\bin\Debug\Terraria.exe
+E:\work\terraria5\bin\Debug\Terraria.pdb
+E:\work\terraria5\bin\Debug\SpriteFontX.dll
+E:\work\terraria5\obj\x86\Debug\Terraria.exe
+E:\work\terraria5\obj\x86\Debug\Terraria.pdb
+E:\work\terraria\obj\x86\Debug\Terraria.exe
+E:\work\terraria\obj\x86\Debug\Terraria.pdb
+E:\work\terraria\bin\Debug\Terraria.exe
+E:\work\terraria\bin\Debug\Terraria.pdb
+E:\work\terraria\bin\Debug\SpriteFontX.dll
+E:\work\terraria\obj\x86\Debug\Terraria.csprojResolveAssemblyReference.cache
+G:\work\terraria\bin\Debug\Terraria.exe
+G:\work\terraria\bin\Debug\Terraria.pdb
+G:\work\terraria\bin\Debug\SpriteFontX.dll
+G:\work\terraria\obj\x86\Debug\Terraria.exe
+G:\work\terraria\obj\x86\Debug\Terraria.pdb
